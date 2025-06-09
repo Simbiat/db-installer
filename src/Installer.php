@@ -32,12 +32,14 @@ class Installer
     /**
      * Install database dependencies for a library based on the current version
      *
-     * @param string $pattern Path and file pattern for GLOB
-     * @param string $version Version
+     * @param string $pattern        Path and file pattern for GLOB
+     * @param string $version        Version
+     * @param string $replace_string Optional regex to match for replacement
+     * @param string $replace_with   Optional regex to replace with
      *
      * @return bool
      */
-    public static function install(string $pattern, string $version = '0.0.0'): bool
+    public static function install(string $pattern, string $version = '0.0.0', string $replace_string = '', string $replace_with = ''): bool
     {
         #Generate SQL to run
         $sql = '';
@@ -49,6 +51,10 @@ class Installer
                 #Get contents from the SQL file
                 $sql .= file_get_contents($file);
             }
+        }
+        #String replacement if it was set up
+        if (!empty($replace_string)) {
+            $sql = preg_replace($replace_string, $replace_with, $sql);
         }
         #If empty - we are up to date
         if (empty($sql)) {
