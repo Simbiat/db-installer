@@ -1,0 +1,39 @@
+{
+    "name": "simbiat/db-installer",
+    "type": "library",
+    "keywords": [
+        "database",
+        "php",
+        "pdo",
+        "installer",
+        "updater"
+    ],
+    "description": "Install database dependencies for a library based on the current version.",
+    "homepage": "https://github.com/Simbiat/db-installer",
+    "license": "AGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Dmitrii Kustov",
+            "email": "support@simbiat.dev",
+            "homepage": "https://www.simbiat.dev",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.4",
+        "ext-pdo": "*",
+        "simbiat/db-query": "^1"
+    },
+    "suggest": {
+        "simbiat/db-pool": "Allows use of database connections pool"
+    },
+    "autoload": {
+        "psr-4": {
+            "Simbiat\\Database\\": "src/"
+        }
+    },
+    "support": {
+        "issues": "https://github.com/Simbiat/db-installer/issues",
+        "source": "https://github.com/Simbiat/db-installer"
+    }
+}
