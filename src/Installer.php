@@ -19,7 +19,7 @@ class Installer
     public function __construct(?\PDO $dbh = null)
     {
         if ($dbh === null) {
-            if (method_exists(Pool::class, 'openConnection')) {
+            if (\method_exists(Pool::class, 'openConnection')) {
                 self::$dbh = Pool::openConnection();
             } else {
                 throw new \RuntimeException('Pool class not loaded and no PDO object provided.');
@@ -45,16 +45,16 @@ class Installer
         $sql = '';
         #Get SQL from all files. Sorting is required since we need a specific order of execution.Add commentMore actions
         /** @noinspection LowPerformingFilesystemOperationsInspection */
-        foreach (glob($pattern) as $file) {
+        foreach (\glob($pattern) as $file) {
             #Compare version and take only newer ones
-            if (version_compare(basename($file, '.sql'), $version, 'gt')) {
+            if (\version_compare(\basename($file, '.sql'), $version, 'gt')) {
                 #Get contents from the SQL file
-                $sql .= file_get_contents($file);
+                $sql .= \file_get_contents($file);
             }
         }
         #String replacement if it was set up
         if (!empty($replace_string)) {
-            $sql = preg_replace($replace_string, $replace_with, $sql);
+            $sql = \preg_replace($replace_string, $replace_with, $sql);
         }
         #If empty - we are up to date
         if (empty($sql)) {
