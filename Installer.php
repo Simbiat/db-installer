@@ -61,6 +61,7 @@ class Installer
         if (empty($sql)) {
             return true;
         }
+
         return Query::query($sql);
     }
 }
