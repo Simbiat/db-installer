@@ -7,7 +7,7 @@ namespace Simbiat\Database;
 /**
  * Install database dependencies for a library
  */
-class Installer
+final class Installer
 {
     /**
      * @var null|\PDO PDO object to run queries against
@@ -20,11 +20,11 @@ class Installer
     public function __construct(?\PDO $dbh = null)
     {
         if ($dbh === null) {
-            if (\method_exists(Pool::class, 'openConnection')) {
-                self::$dbh = Pool::openConnection();
-            } else {
+            if (!\method_exists(Pool::class, 'openConnection')) {
                 throw new \RuntimeException('Pool class not loaded and no PDO object provided.');
             }
+
+            self::$dbh = Pool::openConnection();
         } else {
             self::$dbh = $dbh;
         }
