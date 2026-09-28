@@ -10,7 +10,7 @@ namespace Simbiat\Database;
 final class Installer
 {
     /**
-     * @var null|\PDO PDO object to run queries against
+     * @var \PDO|null PDO object to run queries against
      */
     public static ?\PDO $dbh = null;
 
