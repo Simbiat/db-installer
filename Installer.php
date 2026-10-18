@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Simbiat\Database;
 
 /**
- * Install database dependencies for a library
+ * Install database dependencies for a library.
  */
 final class Installer
 {
     /**
-     * @var \PDO|null PDO object to run queries against
+     * @var null|\PDO PDO object to run queries against
      */
     public static ?\PDO $dbh = null;
 
     /**
-     * @param \PDO|null $dbh PDO obj
+     * @param null|\PDO $dbh PDO obj
      */
     public function __construct(?\PDO $dbh = null)
     {
@@ -31,7 +31,7 @@ final class Installer
     }
 
     /**
-     * Install database dependencies for a library based on the current version
+     * Install database dependencies for a library based on the current version.
      *
      * @param string $pattern        Path and file pattern for GLOB
      * @param string $version        Version
@@ -45,7 +45,7 @@ final class Installer
         // Generate SQL to run
         $sql = '';
         // Get SQL from all files. Sorting is required since we need a specific order of execution.Add commentMore actions
-        /** @noinspection LowPerformingFilesystemOperationsInspection */
+        /* @noinspection LowPerformingFilesystemOperationsInspection */
         foreach (\glob($pattern) as $file) {
             // Compare version and take only newer ones
             if (\version_compare(\basename($file, '.sql'), $version, 'gt')) {
