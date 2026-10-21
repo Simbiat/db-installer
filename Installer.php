@@ -19,7 +19,7 @@ final class Installer
      */
     public function __construct(?\PDO $dbh = null)
     {
-        if ($dbh === null) {
+        if (!$dbh instanceof \PDO) {
             if (!\method_exists(Pool::class, 'openConnection')) {
                 throw new \RuntimeException('Pool class not loaded and no PDO object provided.');
             }
@@ -53,10 +53,12 @@ final class Installer
                 $sql .= \file_get_contents($file);
             }
         }
+
         // String replacement if it was set up
         if (!empty($replace_string)) {
             $sql = \preg_replace($replace_string, $replace_with, $sql);
         }
+
         // If empty - we are up to date
         if (empty($sql)) {
             return true;
